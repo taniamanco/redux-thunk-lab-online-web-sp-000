@@ -1,17 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import catsReducer from './reducers/catsReducer.js';
+class App extends Component {
+  
+  render() {
+    console.log(this.props.catPics)
+    return (
+      <div className="App">
+        <h1>CatBook</h1>
+        {/* missing component */}
+      </div>
+    );
+  }
+}
 
-const store = createStore(catsReducer, applyMiddleware(thunk))
+const mapStateToProps = state => {
+  return {
+    catPics: state.cats,
+    loading: state.loading
+  }
+}
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+export default connect(mapStateToProps)(App)
