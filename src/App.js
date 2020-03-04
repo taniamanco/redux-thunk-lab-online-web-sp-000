@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-class App extends Component {   
-  
-  render() {
-    return (
-      <div>
-        <h1>CatBook</h1>
-        {/* add CatList component here */}
-      </div>
-    );
-  }
-}
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import catsReducer from './reducers/catsReducer.js';
 
-export default App
+const store = createStore(catsReducer, applyMiddleware(thunk))
 
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
